@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transaksi Withdraw</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,7 +14,7 @@
         }
         .container {
             width: 90%;
-            max-width: 600px;
+            max-width: 450px;
             margin: 20px auto;
             background: #25262b;
             padding: 20px;
@@ -23,20 +22,35 @@
         }
         .buttons {
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            margin: 25px;
+            justify-content: center;
+            gap: 5px;
+            margin: 20px 0;
         }
         .buttons button {
             background-color: #2a2a2a;
-            color: white;
+            color: #a4a5a5;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
+            flex: 1;
+            max-width: 150px;
+            font-weight: bold;
+            border: #121212 solid 1px;
         }
         .buttons button.active {
             background-color: #244937;
+        }
+        select {
+            background-color: #121212;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            padding: 10px;
+            width: 100%;
+            max-width: 460px;
+            margin: 0 auto;
+            display: block;
         }
         table {
             width: 100%;
@@ -44,7 +58,7 @@
             margin-top: 10px;
         }
         th, td {
-            padding: 8px;
+            padding: 5px;
             text-align: left;
         }
         .status {
@@ -54,22 +68,34 @@
         .amount {
             color: white;
             text-align: center;
+            font-weight: bold;
+        }
+        @media (max-width: 600px) {
+            .buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .buttons button {
+                flex: none;
+                width: 150%;
+            }
         }
     </style>
 </head>
 <body>
-        <div style="color: white; background-image: url(image.png); background-size: cover; ">
-            <p style="text-align: left; padding-bottom: 10px; padding-top: 10px; padding-left: 25px; font-weight: bold; font-style: italic;">< Transaksi</p>
-        </div>
-        <div class="buttons" style="border: #121212 3px solid;">
-            <button style="padding-left: 50px; padding-right: 50px; text-align: center; border: #121212 2px solid;">Deposit</button>
-            <button style="padding-left: 50px; padding-right: 50px; text-align: center; border: #121212 2px solid;" class="active">Withdraw</button>
-            <button style="padding-left: 50px; padding-right: 50px; text-align: center; border: #121212 2px solid;">Semua</button>
-        </div>
-        <select class="form-control" style="background-color: #121212; width: 465px; margin-left: 25px; height: 45px; justify-content: center; align-items: center; color: white; border: none; border-radius: 7px;">
-            <option>Semua</option>
-          </select>
-        <div class="container">
+    <div style="color: white; background-image: url(image.png); background-size: cover;">
+        <p style="text-align: left; padding: 10px 25px; font-weight: bold; font-style: italic;">&lt; Transaksi</p>
+    </div>
+    <div class="buttons">
+        <button>Deposit</button>
+        <button class="active">Withdraw</button>
+        <button>Semua</button>
+    </div>
+    <select>
+        <option>Semua</option>
+    </select>
+    <div class="container">
         <table>
             <thead>
                 <tr>
@@ -78,38 +104,29 @@
                     <th style="text-align: right;">State</th>
                 </tr>
             </thead>
-            <tbody id="transaction-body">
-            </tbody>
+            <tbody id="transaction-body"></tbody>
         </table>
     </div>
     <script>
         function generateTransactions() {
             let now = new Date();
-            let timeIntervals = [0, 60, 180, 360, 720, 1440, 2880, 5760, 11520, 23040];
+            let timeIntervals = [0, 60, 180, 360, 720, 850, 1000, 1100];
             let tbody = document.getElementById("transaction-body");
             let transactions = [];
-    
+
             for (let i = 0; i < timeIntervals.length; i++) {
                 let transactionTime = new Date(now.getTime() - timeIntervals[i] * 60000);
                 let formattedTime = transactionTime.toLocaleString("id-ID", {
                     year: 'numeric', month: '2-digit', day: '2-digit',
                     hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
                 });
-    
-                // Pisahkan tanggal dan waktu
                 let [date, time] = formattedTime.split(' ');
-    
                 let amount = (Math.floor(Math.random() * (2000000 - 500000 + 1)) + 500000).toLocaleString("id-ID");
-    
-                // Tampilkan tanggal dan waktu secara terpisah dengan `<br>`
-                transactions.push(`<tr><td>${date}<br>${time}</td><td class='amount'>${amount}</td><td class='status'>Berhasil<span style='color: #898a92;'> ></td></tr>`);
+                transactions.push(`<tr><td>${date}<br>${time}</td><td class='amount'>${amount}</td><td class='status'>Berhasil ></td></tr>`);
             }
             tbody.innerHTML = transactions.join("\n");
         }
-    
         generateTransactions();
     </script>
-    
 </body>
-
 </html>
