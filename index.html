@@ -85,7 +85,7 @@
 </head>
 <body>
     <div style="color: white; background-image: url(image.png); background-size: cover;">
-        <p style="text-align: left; padding: 10px 25px; font-weight: bold; font-style: italic;">&lt; Transaksi</p>
+        <p style="text-align: left; padding: 10px 25px; font-weight: bold; font-style: italic;"><span src="glyphicon glyphicon-chevron-left" alt="">< Transaksi</p>
     </div>
     <div class="buttons">
         <button>Deposit</button>
@@ -122,7 +122,7 @@
                 });
                 let [date, time] = formattedTime.split(' ');
                 let amount = (Math.floor(Math.random() * (2000000 - 500000 + 1)) + 500000).toLocaleString("id-ID");
-                transactions.push(`<tr><td>${date}<br>${time}</td><td class='amount'>${amount}</td><td class='status'>Berhasil ></td></tr>`);
+                transactions.push(`<tr><td>${date}<br>${time}</td><td class='amount'>${amount}</td><td class='status'>Berhasil<span style="color: #898a92;"> ></td></tr>`);
             }
             tbody.innerHTML = transactions.join("\n");
         }
