@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaksi Withdraw</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1b1f;
+            color: #898a92;
+            text-align: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            background: #25262b;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            margin: 25px;
+        }
+        .buttons button {
+            background-color: #2a2a2a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .buttons button.active {
+            background-color: #244937;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        .status {
+            color: #4eae83;
+            text-align: right;
+        }
+        .amount {
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+        <div style="color: white; background-image: url(image.png); background-size: cover; ">
+            <p style="text-align: left; padding-bottom: 10px; padding-top: 10px; padding-left: 25px; font-weight: bold; font-style: italic;">< Transaksi</p>
+        </div>
+        <div class="buttons" style="border: #121212 3px solid;">
+            <button style="padding-left: 50px; padding-right: 50px; text-align: center; border: #121212 2px solid;">Deposit</button>
+            <button style="padding-left: 50px; padding-right: 50px; text-align: center; border: #121212 2px solid;" class="active">Withdraw</button>
+            <button style="padding-left: 50px; padding-right: 50px; text-align: center; border: #121212 2px solid;">Semua</button>
+        </div>
+        <select class="form-control" style="background-color: #121212; width: 465px; margin-left: 25px; height: 45px; justify-content: center; align-items: center; color: white; border: none; border-radius: 7px;">
+            <option>Semua</option>
+          </select>
+        <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Waktu</th>
+                    <th style="text-align: center;">Jumlah (Rp)</th>
+                    <th style="text-align: right;">State</th>
+                </tr>
+            </thead>
+            <tbody id="transaction-body">
+            </tbody>
+        </table>
+    </div>
+    <script>
+        function generateTransactions() {
+            let now = new Date();
+            let timeIntervals = [0, 60, 180, 360, 720, 1440, 2880, 5760, 11520, 23040];
+            let tbody = document.getElementById("transaction-body");
+            let transactions = [];
+    
+            for (let i = 0; i < timeIntervals.length; i++) {
+                let transactionTime = new Date(now.getTime() - timeIntervals[i] * 60000);
+                let formattedTime = transactionTime.toLocaleString("id-ID", {
+                    year: 'numeric', month: '2-digit', day: '2-digit',
+                    hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+                });
+    
+                // Pisahkan tanggal dan waktu
+                let [date, time] = formattedTime.split(' ');
+    
+                let amount = (Math.floor(Math.random() * (2000000 - 500000 + 1)) + 500000).toLocaleString("id-ID");
+    
+                // Tampilkan tanggal dan waktu secara terpisah dengan `<br>`
+                transactions.push(`<tr><td>${date}<br>${time}</td><td class='amount'>${amount}</td><td class='status'>Berhasil<span style='color: #898a92;'> ></td></tr>`);
+            }
+            tbody.innerHTML = transactions.join("\n");
+        }
+    
+        generateTransactions();
+    </script>
+    
+</body>
+
+</html>
