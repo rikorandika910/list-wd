@@ -112,29 +112,26 @@
     </div>
 <script>
     function generateTransactions() {
-    let now = new Date();
-    let timeIntervals = [0, 56, 169, 374, 768, 895, 1003, 1121];
-    let tbody = document.getElementById("transaction-body");
-    let transactions = [];
+        let now = new Date();
+        let timeIntervals = [0, 56, 169, 374, 768, 895, 1003, 1121];
+        let tbody = document.getElementById("transaction-body");
+        let transactions = [];
 
-    for (let i = 0; i < timeIntervals.length; i++) {
-        let transactionTime = new Date(now.getTime() - timeIntervals[i] * 60000);
-        let seconds = Math.floor(Math.random() * 60); // Acak detik antara 0-59
-        transactionTime.setSeconds(seconds);
-        
-        let formattedTime = transactionTime.toLocaleString("id-ID", {
-            year: 'numeric', month: '2-digit', day: '2-digit',
-            hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
-        });
-        let [date, time] = formattedTime.split(' ');
-
-        // Ubah rentang nominal antara 100 juta hingga 900 juta
-        let amount = (Math.floor(Math.random() * (900000000 - 100000000 + 1)) + 100000000).toLocaleString("id-ID");
-
-        transactions.push(`<tr><td>${date}<br>${time}</td><td class='amount'>${amount}</td><td class='status'>Berhasil<span style="color: #898a92;"> ></td></tr>`);
+        for (let i = 0; i < timeIntervals.length; i++) {
+            let transactionTime = new Date(now.getTime() - timeIntervals[i] * 60000);
+            let seconds = Math.floor(Math.random() * 60); // Acak detik antara 0-59
+            transactionTime.setSeconds(seconds);
+            
+            let formattedTime = transactionTime.toLocaleString("id-ID", {
+                year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+            });
+            let [date, time] = formattedTime.split(' ');
+            let amount = (Math.floor(Math.random() * (2000000 - 1000000 + 1)) + 1000000).toLocaleString("id-ID");
+            transactions.push(<tr><td>${date}<br>${time}</td><td class='amount'>${amount}</td><td class='status'>Berhasil<span style="color: #898a92;"> ></td></tr>);
+        }
+        tbody.innerHTML = transactions.join("\n");
     }
-    tbody.innerHTML = transactions.join("\n");
-}
     generateTransactions();
 </script>
 
