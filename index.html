@@ -129,7 +129,7 @@ function generateTransactions() {
         let [date, time] = formattedTime.split(' ');
 
         // Ubah rentang nominal antara 100 juta hingga 900 juta
-        let amount = (Math.floor(Math.random() * (900000 - 100000 + 1)) + 100000).toLocaleString("id-ID");
+        let amount = (Math.floor(Math.random() * (3000000 - 1000000 + 1)) + 1000000).toLocaleString("id-ID");
 
         transactions.push(`<tr><td>${date}<br>${time}</td><td class='amount'>${amount}</td><td class='status'>Berhasil<span style="color: #898a92;"> ></td></tr>`);
     }
