@@ -135,7 +135,7 @@ function generateTransactions() {
         let [date, time] = formattedTime.split(' ');
 
         // Nominal dalam kelipatan 50.000 dari 1 juta sampai 3 juta
-        let rawAmount = (Math.floor(Math.random() * ((1500000 - 50000) / 50000 + 1)) * 50000) + 500000;
+        let rawAmount = (Math.floor(Math.random() * ((1000000 - 50000) / 50000 + 1)) * 50000) + 300000;
         let amount = rawAmount.toLocaleString("id-ID");
 
         transactions.push(`<tr><td>${date}<br>${time}</td><td class='amount'>${amount}</td><td class='status'>Berhasil<span style="color: #898a92;"> ></td></tr>`);
