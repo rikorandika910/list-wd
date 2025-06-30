@@ -110,25 +110,31 @@
         </table>
     </div>
     <script>
-        function generateTransactions() {
-            let now = new Date();
-            let timeIntervals = [0, 60, 180, 360, 720, 850, 1000, 1100];
-            let tbody = document.getElementById("transaction-body");
-            let transactions = [];
+function generateTransactions() {
+    let now = new Date();
+    let timeIntervals = [0, 60, 180, 360, 720, 850, 1000, 1100];
+    let tbody = document.getElementById("transaction-body");
+    let transactions = [];
 
-            for (let i = 0; i < timeIntervals.length; i++) {
-                let transactionTime = new Date(now.getTime() - timeIntervals[i] * 60000);
-                let formattedTime = transactionTime.toLocaleString("id-ID", {
-                    year: 'numeric', month: '2-digit', day: '2-digit',
-                    hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
-                });
-                let [date, time] = formattedTime.split(' ');
-                let amount = (Math.floor(Math.random() * (2000000 - 500000 + 1)) + 500000).toLocaleString("id-ID");
-                transactions.push(`<tr><td>${date}<br>${time}</td><td class='amount'>${amount}</td><td class='status'>Berhasil<span style="color: #898a92;"> ></td></tr>`);
-            }
-            tbody.innerHTML = transactions.join("\n");
-        }
-        generateTransactions();
+    for (let i = 0; i < timeIntervals.length; i++) {
+        let transactionTime = new Date(now.getTime() - timeIntervals[i] * 60000);
+        let formattedTime = transactionTime.toLocaleString("id-ID", {
+            year: 'numeric', month: '2-digit', day: '2-digit',
+            hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+        });
+        let [date, time] = formattedTime.split(' ');
+
+        // Pembuatan nominal dengan pembulatan ke 50 ribu
+        let amountRaw = Math.floor(Math.random() * (2000000 - 500000 + 1)) + 500000;
+        let roundedAmount = Math.round(amountRaw / 50000) * 50000;
+        let amount = roundedAmount.toLocaleString("id-ID");
+
+        transactions.push(`<tr><td>${date}<br>${time}</td><td class='amount'>${amount}</td><td class='status'>Berhasil<span style="color: #898a92;"> ></td></tr>`);
+    }
+    tbody.innerHTML = transactions.join("\n");
+}
+generateTransactions();
+
     </script>
 </body>
 </html>
